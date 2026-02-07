@@ -1,0 +1,186 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💗</title>
+
+<!-- Cute fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff5f9e, #ff9a9e);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  overflow: hidden;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 35px;
+  border-radius: 26px;
+  text-align: center;
+  max-width: 380px;
+  width: 90%;
+  box-shadow: 0 0 40px rgba(255, 105, 180, 0.8);
+  backdrop-filter: blur(6px);
+  z-index: 2;
+}
+
+/* Glowing photo */
+.photo {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 20px auto;
+  border: 4px solid #fff;
+  box-shadow:
+    0 0 25px rgba(255, 182, 193, 0.9),
+    0 0 45px rgba(255, 105, 180, 0.8),
+    0 0 70px rgba(255, 20, 147, 0.7);
+  animation: glowPulse 3s infinite ease-in-out;
+}
+
+@keyframes glowPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+#message {
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 120px;
+  margin-top: 10px;
+}
+
+.signature {
+  font-family: 'Pacifico', cursive;
+  font-size: 20px;
+  margin-top: 12px;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+/* Button */
+button {
+  margin-top: 22px;
+  padding: 12px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #ff4b7d, #ff85a2);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #ff85a2;
+}
+
+/* Floating hearts & kisses */
+.float {
+  position: absolute;
+  font-size: 22px;
+  animation: floatUp linear forwards;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+  <img src="WhatsApp Image 2026-02-07 at 14.32.16.jpeg" alt="Her photo" class="photo">
+
+  <h1 id="name">Hey 💗</h1>
+
+  <div id="message"></div>
+
+  <div class="signature" id="signature">– Your Name 💗</div>
+
+  <button onclick="startLove()">Tap 💗</button>
+</div>
+
+<script>
+/* CHANGE NAMES HERE */
+const herName = "AANYA 💗";
+const yourName = "Ishaan";
+
+document.getElementById("name").innerText = "Hey " + herName;
+document.getElementById("signature").innerText = "– " + yourName + " 💗";
+
+/* Typing message */
+const text =
+"I made this just for you.\n\n" +
+"Your smile makes everything feel lighter,\n" +
+"and your presence means a lot to me.\n\n" +
+"Always stay the way you are 💗";
+
+let index = 0;
+
+function typeText() {
+  if (index < text.length) {
+    document.getElementById("message").innerHTML +=
+      text.charAt(index) === "\n" ? "<br>" : text.charAt(index);
+    index++;
+    setTimeout(typeText, 40);
+  } else {
+    document.getElementById("signature").style.opacity = 1;
+  }
+}
+
+/* Floating hearts & kisses */
+function floatingLove() {
+  const item = document.createElement("div");
+  item.className = "float";
+  item.innerHTML = Math.random() > 0.5 ? "💗" : "💋";
+  item.style.left = Math.random() * 100 + "vw";
+  item.style.bottom = "0";
+  item.style.animationDuration = Math.random() * 3 + 4 + "s";
+  document.body.appendChild(item);
+  setTimeout(() => item.remove(), 7000);
+}
+
+function startLove() {
+  document.getElementById("bgMusic").play();
+  document.getElementById("message").innerHTML = "";
+  document.getElementById("signature").style.opacity = 0;
+  index = 0;
+  typeText();
+  setInterval(floatingLove, 400);
+}
+</script>
+
+</body>
+</html>
